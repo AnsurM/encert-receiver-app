@@ -13,13 +13,16 @@ import pharma from './assets/pharma.png'
 import ced from './assets/ced.png'
 import tameer from './assets/tameer.png'
 import fm91 from './assets/fm91.png'
+import reducers from './redux/reducers';
 
 class SingleCertificate extends Component {
 
-
+    state = {
+        certificateData: this.props.certificateData
+    }
 
     render() {
-        console.log("Data is: ", this.props.certificateData);
+        console.log("State is: ", this.state);
         return (
       <div>
         <div>
@@ -56,7 +59,7 @@ class SingleCertificate extends Component {
                 </Col>
                 <Col md={6} xs={10} sm={10}>
                   <div className="participant-placeholder text-center">
-                    <p>Khwaja Abdul Sami</p>
+                    <p>{this.state.certificateData.receiver_name}</p>
                   </div>
                 </Col>
                 <Col md={3} sm={1} xs={1}>
@@ -72,7 +75,7 @@ class SingleCertificate extends Component {
                 </Col>
                 <Col md={6} xs={10} sm={10}>
                   <div className="participant-placeholder text-center">
-                    <p>Utopians</p>
+                    <p>{this.state.certificateData.team_name}</p>
                   </div>
                 </Col>
                 
@@ -120,7 +123,6 @@ class SingleCertificate extends Component {
     );
   }
 }
-
 function mapStateToProp(state) {
     console.log(state)
     return ({

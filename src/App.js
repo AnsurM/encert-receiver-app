@@ -6,7 +6,7 @@ import { Card, Icon, Avatar, Modal, Button, Input, message } from 'antd';
 import './App.css';
 
 import { connect } from 'react-redux';
-import { USER_DATA } from './redux/actions/signin-action';
+import { USER_DATA, CERTIFICATE_DATA } from './redux/actions/signin-action';
 import 'antd/dist/antd.css'
 import Logo from './assets/logo2.png'
 import blockstackLogo from './assets/blockstack-icon.svg'
@@ -85,20 +85,21 @@ class App extends Component {
     if (userData.identityAddress) {
       // alert("Identity exists in server. ", userData.identityAddress);
       let that = this;
+      this.props.USER_DATA(userData);
+      console.log("Identity exists in server. ", userData.identityAddress);
       axios.get(`https://encert-server.herokuapp.com/issuer/participant/exist/${userData.identityAddress}`, {
       })
-        .then(function (response) {
-          console.log("Response for id check is: ", response);
-          // console.log("Data exists for blockstack ID in server : ", response.data.data.result);
-          if (!response.data.data.result) {
-            that.setState({ blockStackModalIsVisible: true });
+      .then(function (response) {
+        console.log("Response for id check is: ", response);
+        // console.log("Data exists for blockstack ID in server : ", response.data.data.result);
+        if (!response.data.data.result) {
+          that.setState({ blockStackModalIsVisible: true });
           }
 
 
           blockstack.lookupProfile(username).then((person) => {
             that.setState({ person });
             // console.log("LOOKUP RETURNS: ", person);
-            that.props.USER_DATA(userData);
           })
 
           axios.get("https://encert-server.herokuapp.com/issuer/certificate/blockstack/" + userData.identityAddress)
@@ -255,6 +256,7 @@ class App extends Component {
     // <Link to="route" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"));}} />
 
     console.log("Received certificate details: ", cert);
+    this.props.CERTIFICATE_DATA(cert)
   }
 
 
@@ -400,6 +402,9 @@ function mapDispatchToProp(dispatch) {
   return ({
     USER_DATA: (user) => {
       dispatch(USER_DATA(user))
+    },
+    CERTIFICATE_DATA: (certData) => {
+      dispatch(CERTIFICATE_DATA(certData))
     },
   })
 }
