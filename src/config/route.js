@@ -43,9 +43,6 @@ const BasicRouting = () => {
             <Route exact path="/" component={App} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/showCertificate" component={SingleCertificate} />
-            
-          
-            
         
         </div>
     </Router>
