@@ -35,3 +35,13 @@
     background-repeat: no-repeat;
     height: 120px;
   }
+  .qr-container{
+    /* background-origin: content-box; */
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 190px;
+    width: 190px !important;
+    border: black solid 1px;
+    background-color: white;
+  }
