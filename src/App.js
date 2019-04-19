@@ -337,9 +337,6 @@ class App extends Component {
               <div>
                 <div>
                   <UserInfo user={this.state.person} />
-                  {/* <button className="signin-btn" onClick={this.handleSignOut}>
-                    Log out
-                  </button> */}
                 </div>
                 <div className="separator"/>
                 <div>
@@ -352,20 +349,6 @@ class App extends Component {
                   </Row>
                 </Container>
                 <br />
-                {/* <div>
-              <Card
-                onClick={() => this.showModal()}
-                style={{ width: 300 }}
-                cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
-              // actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
-              >
-                <Meta
-                  avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                  title="Card title"
-                  description="This is the description"
-                />
-              </Card>
-            </div> */}
               </div>
               :
               <div className="email-form">
