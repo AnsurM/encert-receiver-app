@@ -81,20 +81,20 @@ class App extends Component {
     if (userData.identityAddress) {
       // alert("Identity exists in server. ", userData.identityAddress);
       let that = this;
+      this.props.USER_DATA(userData);
       axios.get(`https://encert-server.herokuapp.com/issuer/participant/exist/${userData.identityAddress}`, {
       })
-        .then(function (response) {
-          console.log("Response for id check is: ", response);
-          // console.log("Data exists for blockstack ID in server : ", response.data.data.result);
-          if (!response.data.data.result) {
-            that.setState({ blockStackModalIsVisible: true });
+      .then(function (response) {
+        console.log("Response for id check is: ", response);
+        // console.log("Data exists for blockstack ID in server : ", response.data.data.result);
+        if (!response.data.data.result) {
+          that.setState({ blockStackModalIsVisible: true });
           }
 
 
           blockstack.lookupProfile(username).then((person) => {
             that.setState({ person });
             // console.log("LOOKUP RETURNS: ", person);
-            that.props.USER_DATA(userData);
           })
 
           axios.get("https://encert-server.herokuapp.com/issuer/certificate/blockstack/" + userData.identityAddress)
