@@ -78,7 +78,7 @@ class App extends Component {
 
   loadPerson() {
     let username = blockstack.loadUserData().username
-    // console.log(blockstack.loadUserData(), "user data");
+    // console.log(blockstack.loadUserData().profile.image[0].contentUrl, "user data");
     let userData = blockstack.loadUserData();
     // history.push('/home');
 
@@ -117,9 +117,9 @@ class App extends Component {
                     // actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                     >
                       <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                        avatar={<Avatar src={blockstack.loadUserData().profile.image[0].contentUrl} />}
                         title={cert.achievement_title}
-                        description="This is the description"
+                        description={cert.event_name}
                       />
                     </Card>
                   </Link>
