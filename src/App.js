@@ -104,20 +104,22 @@ class App extends Component {
 
           axios.get("https://encert-server.herokuapp.com/issuer/certificate/blockstack/" + userData.identityAddress)
             .then(function (response) {
+              // console.log(blockstack.loadUserData().profile.image[0],"image")
              console.log("Certificate Array is: ", response.data.data.results);
               // console.log("CERTIFICATES: " + response.data.data.results);
               let arr = response.data.data.results
               let displayCerts = arr.map((cert, i) => {
+                console.log(cert,"certificate data")
                 return (
                   <Col style={{marginBottom: '20px'}} md={3} sm={12}>
-                  <Link to="/showCertificate" target="_blank" onClick={() => that.showModal(cert)} >
+                  <Link to={{ pathname: "/Certificate", search: "?"+cert._id }} target="_blank" onClick={() => that.showModal(cert)} >
                     <Card                    
                       style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                       cover={<img alt="example" src={inventLogo} />}
                     // actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                     >
                       <Meta
-                        avatar={<Avatar src={blockstack.loadUserData().profile.image[0].contentUrl} />}
+                        // avatar={<Avatar src={(blockstack.loadUserData().profile.imag=='undefined')?(inventLogo):(blockstack.loadUserData().profile.image[0].contentUrl)} />}
                         title={cert.achievement_title}
                         description={cert.event_name}
                       />

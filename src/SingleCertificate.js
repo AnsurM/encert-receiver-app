@@ -18,14 +18,34 @@ import signature1 from './assets/signature1.png'
 import signature2 from './assets/signature2.png'
 import qrcode from './assets/qrcode.png'
 import background from './assets/Background.jpg';
+const axios = require('axios');
+
 
 class SingleCertificate extends Component {
+  state={
+    certData:{}
+  }
+  componentDidMount(){
+    let query= this.props.location.search.split('?');
+let that=this;
+      axios.get("https://encert-server.herokuapp.com/issuer/certificate/"+query[1])
+      .then(function(response){
+        console.log(response.data.data.result,"response data")
+        that.setState({
+          certData:response.data.data.result
+        })
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+  }
 
-    state = {
-        certificateData: this.props.certificateData
-    }
+    // state = {
+    //     certificateData: this.props.certificateData
+    // }
 
     render() {
+        console.log(this.props.location,"location")
         console.log("State is: ", this.state);
         return (
             <div>
@@ -63,7 +83,7 @@ class SingleCertificate extends Component {
                       </Col>
                       <Col md={6} xs={10} sm={10}>
                         <div className="participant-placeholder text-center">
-                          <p>{this.state.certificateData.receiver_name}</p>
+                          <p>{this.state.certData.receiver_name}</p>
                         </div>
                       </Col>
                       <Col md={3} sm={1} xs={1}>
@@ -79,7 +99,7 @@ class SingleCertificate extends Component {
                       </Col>
                       <Col md={6} xs={10} sm={10}>
                         <div className="participant-placeholder text-center">
-                          <p>{this.state.certificateData.team_name}</p>
+                          <p>{this.state.certData.team_name}</p>
                         </div>
                       </Col>
                       
@@ -180,11 +200,12 @@ class SingleCertificate extends Component {
           );
         }
 }
-function mapStateToProp(state) {
-    console.log(state)
-    return ({
-        certificateData: state.signIn_reducer.certificate_data,
-    })
-}
+// function mapStateToProp(state) {
+//     console.log(state)
+//     return ({
+//         certificateData: state.signIn_reducer.certificate_data,
+//     })
+// }
 
-export default connect(mapStateToProp,null)(SingleCertificate);
+// export default connect(mapStateToProp,null)(SingleCertificate);
+export default SingleCertificate;
