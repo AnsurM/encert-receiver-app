@@ -13,6 +13,10 @@ import blockstackLogo from './assets/blockstack-icon.svg'
 import encertLogo from './assets/logo-blackweb.png'
 import inventLogo from './assets/invent.png'
 import { Container, Row, Col } from 'react-grid-system';
+import {
+  Link  
+} from 'react-router-dom';
+
 
 const blockstack = require('blockstack');
 const { Meta } = Card;
@@ -105,8 +109,8 @@ class App extends Component {
               let displayCerts = arr.map((cert, i) => {
                 return (
                   <Col style={{marginBottom: '20px'}} md={3} sm={12}>
-                    <Card
-                      onClick={() => that.showModal()}
+                  <Link to="/showCertificate" target="_blank" onClick={() => that.showModal(cert)} >
+                    <Card                    
                       style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                       cover={<img alt="example" src={inventLogo} />}
                     // actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
@@ -117,6 +121,7 @@ class App extends Component {
                         description="This is the description"
                       />
                     </Card>
+                  </Link>
                   </Col>
                 );
               });
@@ -243,9 +248,13 @@ class App extends Component {
     // }
   };
 
-  showModal = () => {
+  showModal = (cert) => {
     // alert("Modal is working.");
-    window.open('https://xord.one/');
+    // window.open('https://xord.one/');
+    // this.props.history.push('/showCertificate');
+    // <Link to="route" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"));}} />
+
+    console.log("Received certificate details: ", cert);
   }
 
 
