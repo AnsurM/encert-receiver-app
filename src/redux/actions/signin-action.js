@@ -10,7 +10,7 @@ return { type: USER_LOGIN_DATA, payload : data }
 
 
 export function CERTIFICATE_DATA(data) {
-  
-  console.log(data)
+  console.log("======")
+  console.log("cert data",data)
 return { type: CERT_DATA, payload : data }
 }

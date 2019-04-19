@@ -6,7 +6,7 @@ import { Card, Icon, Avatar, Modal, Button, Input, message } from 'antd';
 import './App.css';
 
 import { connect } from 'react-redux';
-import { USER_DATA } from './redux/actions/signin-action';
+import { USER_DATA, CERTIFICATE_DATA } from './redux/actions/signin-action';
 import 'antd/dist/antd.css'
 import Logo from './assets/logo2.png'
 import blockstackLogo from './assets/blockstack-icon.svg'
@@ -255,6 +255,7 @@ class App extends Component {
     // <Link to="route" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"));}} />
 
     console.log("Received certificate details: ", cert);
+    this.props.CERTIFICATE_DATA(cert)
   }
 
 
@@ -417,6 +418,9 @@ function mapDispatchToProp(dispatch) {
   return ({
     USER_DATA: (user) => {
       dispatch(USER_DATA(user))
+    },
+    CERTIFICATE_DATA: (certData) => {
+      dispatch(CERTIFICATE_DATA(certData))
     },
   })
 }

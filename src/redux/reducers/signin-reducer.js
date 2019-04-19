@@ -1,4 +1,4 @@
-import { USER_LOGIN_DATA } from "../actions/signin-action";
+import { USER_LOGIN_DATA, CERT_DATA } from "../actions/signin-action";
 
 const INITIAL_STATE = {
 user_data : {},
